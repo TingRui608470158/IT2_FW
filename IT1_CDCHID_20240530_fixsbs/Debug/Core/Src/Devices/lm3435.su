@@ -1,0 +1,2 @@
+../Core/Src/Devices/lm3435.c:88:6:LM3435_Write	0	static
+../Core/Src/Devices/lm3435.c:93:6:LM3435_Write_Current_LED	16	static

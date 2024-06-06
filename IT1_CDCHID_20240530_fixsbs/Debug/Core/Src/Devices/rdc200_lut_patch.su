@@ -1,0 +1,14 @@
+../Core/Src/Devices/rdc200_lut_patch.c:185:12:update_panel_flash_patch_data.part.0	48	static
+../Core/Src/Devices/rdc200_lut_patch.c:110:12:build_rdc_flash_patch_data	72	static
+../Core/Src/Devices/rdc200_lut_patch.c:263:12:build_panel_flash_patch_data	80	static
+../Core/Src/Devices/rdc200_lut_patch.c:359:5:rtiVC_DownloadPixelShiftPatchLUT	32	static
+../Core/Src/Devices/rdc200_lut_patch.c:460:5:rtiVC_DownloadLedDutyPatchLUT	16	static
+../Core/Src/Devices/rdc200_lut_patch.c:501:5:rtiVC_DownloadLedCurrentPatchLUT	24	static
+../Core/Src/Devices/rdc200_lut_patch.c:582:5:rtiVC_DumpRdcPatchLut	24	static
+../Core/Src/Devices/rdc200_lut_patch.c:624:5:rtiVC_DumpPanelPatchLut	32	static
+../Core/Src/Devices/rdc200_lut_patch.c:682:5:rtiVC_DownloadRdcManualPatchLUT	24	static
+../Core/Src/Devices/rdc200_lut_patch.c:730:5:rtiVC_DownloadPanelManualPatchLUT	72	static
+../Core/Src/Devices/rdc200_lut_patch.c:792:6:rtiVC_ResetManualRdcPatch	0	static
+../Core/Src/Devices/rdc200_lut_patch.c:797:5:rtiVC_TuneManualRdcPatch	16	static
+../Core/Src/Devices/rdc200_lut_patch.c:816:6:rtiVC_ResetManualPanelPatch	0	static
+../Core/Src/Devices/rdc200_lut_patch.c:822:5:rtiVC_TuneManualPanelPatch	40	static

@@ -1,0 +1,7 @@
+../Core/Src/Drivers/i2c.c:19:19:I2CReadWords	40	static
+../Core/Src/Drivers/i2c.c:52:19:I2CReadBytes	32	static
+../Core/Src/Drivers/i2c.c:92:6:I2CWriteBytes	32	static
+../Core/Src/Drivers/i2c.c:115:19:I2CReadBytes16	32	static
+../Core/Src/Drivers/i2c.c:155:6:I2CWriteBytes16	32	static
+../Core/Src/Drivers/i2c.c:178:9:I2CReadByte	40	static
+../Core/Src/Drivers/i2c.c:207:6:I2CWriteByte	32	static

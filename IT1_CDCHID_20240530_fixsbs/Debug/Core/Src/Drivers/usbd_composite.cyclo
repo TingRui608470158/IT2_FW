@@ -1,0 +1,8 @@
+../Core/Src/Drivers/usbd_composite.c:461:17:USBD_Composite_Init	1
+../Core/Src/Drivers/usbd_composite.c:477:17:USBD_Composite_DeInit	1
+../Core/Src/Drivers/usbd_composite.c:494:17:USBD_Composite_EP0_RxReady	1
+../Core/Src/Drivers/usbd_composite.c:509:17:USBD_Composite_Setup	9
+../Core/Src/Drivers/usbd_composite.c:618:11:USBD_Composite_GetFSCfgDesc	1
+../Core/Src/Drivers/usbd_composite.c:631:11:USBD_Composite_GetDeviceQualifierDescriptor	1
+../Core/Src/Drivers/usbd_composite.c:566:17:USBD_Composite_DataIn	3
+../Core/Src/Drivers/usbd_composite.c:594:10:USBD_Composite_DataOut	2

@@ -1,0 +1,11 @@
+../Core/Src/Devices/rti_vc_devif.c:107:6:rtiVC_ChangeI2CBusNumber	0	static
+../Core/Src/Devices/rti_vc_devif.c:127:5:rtiVC_ReadBurstDeviceExt	16	static
+../Core/Src/Devices/rti_vc_devif.c:248:5:rtiVC_WriteBurstDeviceExt	24	static
+../Core/Src/Devices/rti_vc_devif.c:350:6:rtiVC_ReadDevice16	24	static
+../Core/Src/Devices/rti_vc_devif.c:492:6:rtiVC_ReadDevice	24	static
+../Core/Src/Devices/rti_vc_devif.c:597:6:rtiVC_WriteDevice16	32	static
+../Core/Src/Devices/rti_vc_devif.c:734:6:rtiVC_WriteDevice	32	static
+../Core/Src/Devices/rti_vc_devif.c:870:6:rtiVC_CloseDevice	0	static
+../Core/Src/Devices/rti_vc_devif.c:881:5:rtiVC_OpenDevice	0	static
+../Core/Src/Devices/rti_vc_devif.c:971:6:rtiVC_DeinitDevice	0	static
+../Core/Src/Devices/rti_vc_devif.c:979:6:rtiVC_InitDevice	0	static

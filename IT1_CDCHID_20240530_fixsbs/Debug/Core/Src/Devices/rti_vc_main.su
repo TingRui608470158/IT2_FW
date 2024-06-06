@@ -1,0 +1,3 @@
+../Core/Src/Devices/rti_vc_main.c:64:6:rtiVC_SetSlaveAddressRDC	0	static
+../Core/Src/Devices/rti_vc_main.c:87:6:rtiVC_Denitialize	8	static
+../Core/Src/Devices/rti_vc_main.c:118:5:rtiVC_Initialize	16	static

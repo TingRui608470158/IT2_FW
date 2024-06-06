@@ -1,0 +1,4 @@
+../Core/Src/Devices/rti_vc_regio.c:168:6:RDC_REG_MASK_SET	1
+../Core/Src/Devices/rti_vc_regio.c:179:6:RDP_REG_SET	3
+../Core/Src/Devices/rti_vc_regio.c:230:6:RDP_REG_GET	4
+../Core/Src/Devices/rti_vc_regio.c:340:6:RDP_REG_MASK_SET	1

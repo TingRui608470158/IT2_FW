@@ -1,0 +1,10 @@
+../STM32_USB_Composite/Class/HID/Src/usbd_hid.c:662:17:USBD_HID_GetFSCfgDesc	0	static
+../STM32_USB_Composite/Class/HID/Src/usbd_hid.c:676:17:USBD_HID_GetHSCfgDesc	0	static
+../STM32_USB_Composite/Class/HID/Src/usbd_hid.c:690:17:USBD_HID_GetOtherSpeedCfgDesc	0	static
+../STM32_USB_Composite/Class/HID/Src/usbd_hid.c:704:16:USBD_HID_DataIn	0	static
+../STM32_USB_Composite/Class/HID/Src/usbd_hid.c:721:17:USBD_HID_GetDeviceQualifierDesc	0	static
+../STM32_USB_Composite/Class/HID/Src/usbd_hid.c:480:16:USBD_HID_Setup	24	static
+../STM32_USB_Composite/Class/HID/Src/usbd_hid.c:454:16:USBD_HID_DeInit	16	static
+../STM32_USB_Composite/Class/HID/Src/usbd_hid.c:413:16:USBD_HID_Init	16	static
+../STM32_USB_Composite/Class/HID/Src/usbd_hid.c:605:9:USBD_HID_SendReport	16	static
+../STM32_USB_Composite/Class/HID/Src/usbd_hid.c:633:10:USBD_HID_GetPollingInterval	0	static

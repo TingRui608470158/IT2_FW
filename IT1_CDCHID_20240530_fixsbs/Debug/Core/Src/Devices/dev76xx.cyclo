@@ -1,0 +1,9 @@
+../Core/Src/Devices/dev76xx.c:53:6:dev76xx_assignI2CHandl	1
+../Core/Src/Devices/dev76xx.c:74:6:dev76xx_setupResetPin	1
+../Core/Src/Devices/dev76xx.c:87:6:dev76xx_writeReg	1
+../Core/Src/Devices/dev76xx.c:103:6:dev76xx_readReg	2
+../Core/Src/Devices/dev76xx.c:165:6:dev76xx_reset	1
+../Core/Src/Devices/dev76xx.c:174:6:dev76xx_switchBank	2
+../Core/Src/Devices/dev76xx.c:187:6:dev76xx_expo	21
+../Core/Src/Devices/dev76xx.c:121:6:dev76xx_init	3
+../Core/Src/Devices/dev76xx.c:341:5:dev76xx_detectGesture	20

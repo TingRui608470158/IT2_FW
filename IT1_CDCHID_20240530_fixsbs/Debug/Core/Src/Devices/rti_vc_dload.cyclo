@@ -1,0 +1,7 @@
+../Core/Src/Devices/rti_vc_dload.c:372:6:rtiVC_StopDownload	1
+../Core/Src/Devices/rti_vc_dload.c:377:6:rtiVC_StartDownload	55
+../Core/Src/Devices/rti_vc_dload.c:466:6:rtiVC_RemoveAllSetupItem	6
+../Core/Src/Devices/rti_vc_dload.c:479:5:rtiVC_SetupDownloadItem	3
+../Core/Src/Devices/rti_vc_dload.c:508:6:rtiVC_RegisterDownloadCallback	1
+../Core/Src/Devices/rti_vc_dload.c:519:6:rtiVC_DeinitDownload	7
+../Core/Src/Devices/rti_vc_dload.c:538:6:rtiVC_InitDownload	2

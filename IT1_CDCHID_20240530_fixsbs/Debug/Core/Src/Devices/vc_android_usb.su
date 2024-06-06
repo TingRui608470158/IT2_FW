@@ -1,0 +1,11 @@
+../Core/Src/Devices/vc_android_usb.c:127:9:ausb_single_read16	72	static
+../Core/Src/Devices/vc_android_usb.c:155:9:ausb_single_read	72	static
+../Core/Src/Devices/vc_android_usb.c:180:6:ausb_read_burst	96	static
+../Core/Src/Devices/vc_android_usb.c:229:6:ausb_single_write16	72	static
+../Core/Src/Devices/vc_android_usb.c:254:6:ausb_single_write	72	static
+../Core/Src/Devices/vc_android_usb.c:276:6:ausb_write_burst	80	static
+../Core/Src/Devices/vc_android_usb.c:315:6:ausb_set_i2c_speed	72	static
+../Core/Src/Devices/vc_android_usb.c:332:6:ausb_set_slave_chipId	0	static
+../Core/Src/Devices/vc_android_usb.c:341:6:ausb_change_i2c_port	72	static
+../Core/Src/Devices/vc_android_usb.c:358:6:ausb_close	32	static
+../Core/Src/Devices/vc_android_usb.c:383:5:ausb_open	48	static

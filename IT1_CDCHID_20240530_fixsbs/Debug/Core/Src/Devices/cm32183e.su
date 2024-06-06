@@ -1,0 +1,15 @@
+../Core/Src/Devices/cm32183e.c:48:6:GetAmbientLightSensorCompleteFlag	0	static
+../Core/Src/Devices/cm32183e.c:61:6:SetAmbientLightSensorCompleteFlag	0	static
+../Core/Src/Devices/cm32183e.c:75:6:initialize_CM32183E	56	static
+../Core/Src/Devices/cm32183e.c:99:7:read_CM32183E	56	static
+../Core/Src/Devices/cm32183e.c:136:6:complete_CM32183E	40	static
+../Core/Src/Devices/cm32183e.c:150:6:reset_CM32183E	40	static
+../Core/Src/Devices/cm32183e.c:165:6:clear_interrupt	40	static
+../Core/Src/Devices/cm32183e.c:178:6:enable_sensor	40	static
+../Core/Src/Devices/cm32183e.c:192:6:disable_sensor	40	static
+../Core/Src/Devices/cm32183e.c:206:6:enable_interrupt	0	static
+../Core/Src/Devices/cm32183e.c:220:6:disable_interrupt	0	static
+../Core/Src/Devices/cm32183e.c:237:6:set_als_int_threshold	56	static
+../Core/Src/Devices/cm32183e.c:266:10:read_als_data	40	static
+../Core/Src/Devices/cm32183e.c:282:10:CM32183E_read_word	40	static
+../Core/Src/Devices/cm32183e.c:302:6:CM32183E_write_word	40	static

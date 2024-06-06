@@ -1,0 +1,9 @@
+../Core/Src/Devices/ak09918.c:28:9:ak09918_init	2
+../Core/Src/Devices/ak09918.c:50:6:ak09918_mag_read	3
+../Core/Src/Devices/ak09918.c:72:6:ak09918_mag_read_raw	2
+../Core/Src/Devices/ak09918.c:103:6:ak09918_mag_read_uT	3
+../Core/Src/Devices/ak09918.c:125:6:ak09918_who_am_i	1
+../Core/Src/Devices/ak09918.c:142:6:ak09918_soft_reset	1
+../Core/Src/Devices/ak09918.c:161:6:ak09918_register_check	3
+../Core/Src/Devices/ak09918.c:190:6:ak09918_register_set_and_clear_bits	2
+../Core/Src/Devices/ak09918.c:216:6:ak09918_operation_mode_setting	1

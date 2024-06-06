@@ -1,0 +1,4 @@
+../Core/Src/Devices/test_main.c:11:8:select_gamma_value	5
+../Core/Src/Devices/test_main.c:39:6:test_RegisterIO_RDP	7
+../Core/Src/Devices/test_main.c:154:6:test_RegisterIO_RDC	5
+../Core/Src/Devices/test_main.c:291:5:rdc200a_test_main	4

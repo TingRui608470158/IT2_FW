@@ -1,0 +1,6 @@
+../Core/Src/Drivers/tools.c:13:9:DPRINTU	1
+../Core/Src/Drivers/tools.c:22:9:DPRINTU_END	1
+../Core/Src/Drivers/tools.c:31:6:print_string	1
+../Core/Src/Drivers/tools.c:42:6:print_hex_string	3
+../Core/Src/Drivers/tools.c:58:6:waitForCdcData	2
+../Core/Src/Drivers/tools.c:69:6:sendCdcData	1

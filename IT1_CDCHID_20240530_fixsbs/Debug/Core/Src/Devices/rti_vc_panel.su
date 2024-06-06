@@ -1,0 +1,17 @@
+../Core/Src/Devices/rti_vc_panel.c:48:7:rdp_compensate_temperature	20	static
+../Core/Src/Devices/rti_vc_panel.c:74:5:rtiVC_DecreaseBrightness	0	static
+../Core/Src/Devices/rti_vc_panel.c:94:5:rtiVC_IncreaseBrightness	0	static
+../Core/Src/Devices/rti_vc_panel.c:114:6:rtiVC_SetBrightness	0	static
+../Core/Src/Devices/rti_vc_panel.c:130:5:rtiVC_GetPanelOtpSummary	24	static
+../Core/Src/Devices/rti_vc_panel.c:180:5:rtiVC_GetTemperature	24	static
+../Core/Src/Devices/rti_vc_panel.c:241:5:rtiVC_GetVerticalPixelShift	24	static
+../Core/Src/Devices/rti_vc_panel.c:286:5:rtiVC_GetHorizontalPixelShift	24	static
+../Core/Src/Devices/rti_vc_panel.c:335:5:rtiVC_SetVerticalPixelShift	24	static
+../Core/Src/Devices/rti_vc_panel.c:460:5:rtiVC_SetHorizontalPixelShift	24	static
+../Core/Src/Devices/rti_vc_panel.c:617:5:rtiVC_GetPanelDeviceID	0	static
+../Core/Src/Devices/rti_vc_panel.c:646:5:rtiVC_GetLedCurrent	4	static
+../Core/Src/Devices/rti_vc_panel.c:682:5:rtiVC_SetLedCurrent	4	static
+../Core/Src/Devices/rti_vc_panel.c:718:5:rtiVC_GetLedLevelRange	0	static
+../Core/Src/Devices/rti_vc_panel.c:768:5:rtiVC_prepare_panel	0	static
+../Core/Src/Devices/rti_vc_panel.c:795:6:rtiVC_DeinitPanel	0	static
+../Core/Src/Devices/rti_vc_panel.c:805:6:rtiVC_InitPanel	8	static

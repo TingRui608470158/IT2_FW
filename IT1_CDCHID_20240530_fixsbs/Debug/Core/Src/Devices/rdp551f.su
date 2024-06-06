@@ -1,0 +1,12 @@
+../Core/Src/Devices/rdp551f.c:183:12:rdp551f_get_led_level_range	0	static
+../Core/Src/Devices/rdp551f.c:332:5:rdp551f_get_vertical_pixel_shift	8	static
+../Core/Src/Devices/rdp551f.c:339:5:rdp551f_get_horizontal_pixel_shift	8	static
+../Core/Src/Devices/rdp551f.c:374:5:rdp551f_get_device_id	24	static
+../Core/Src/Devices/rdp551f.c:156:13:rdp551f_read_led_current_from_reg	24	static
+../Core/Src/Devices/rdp551f.c:191:12:rdp551f_set_led_current	32	static
+../Core/Src/Devices/rdp551f.c:346:5:rdp551f_set_vertical_pixel_shift	16	static
+../Core/Src/Devices/rdp551f.c:360:5:rdp551f_set_horizontal_pixel_shift	16	static
+../Core/Src/Devices/rdp551f.c:64:12:rdp551f_get_temperature	64	static
+../Core/Src/Devices/rdp551f.c:306:12:rdp551f_get_led_current	16	static
+../Core/Src/Devices/rdp551f.c:475:12:rdp551f_prepare_panel	16	static
+../Core/Src/Devices/rdp551f.c:502:5:RDP551F_PanelProbe	8	static

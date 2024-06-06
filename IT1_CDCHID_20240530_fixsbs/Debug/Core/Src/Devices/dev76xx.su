@@ -1,0 +1,9 @@
+../Core/Src/Devices/dev76xx.c:53:6:dev76xx_assignI2CHandl	0	static
+../Core/Src/Devices/dev76xx.c:74:6:dev76xx_setupResetPin	32	static
+../Core/Src/Devices/dev76xx.c:87:6:dev76xx_writeReg	24	static,ignoring_inline_asm
+../Core/Src/Devices/dev76xx.c:103:6:dev76xx_readReg	32	static,ignoring_inline_asm
+../Core/Src/Devices/dev76xx.c:165:6:dev76xx_reset	8	static
+../Core/Src/Devices/dev76xx.c:174:6:dev76xx_switchBank	24	static,ignoring_inline_asm
+../Core/Src/Devices/dev76xx.c:187:6:dev76xx_expo	56	static,ignoring_inline_asm
+../Core/Src/Devices/dev76xx.c:121:6:dev76xx_init	88	static,ignoring_inline_asm
+../Core/Src/Devices/dev76xx.c:341:5:dev76xx_detectGesture	40	static,ignoring_inline_asm

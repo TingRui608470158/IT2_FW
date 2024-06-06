@@ -1,0 +1,4 @@
+../Core/Src/Devices/test_rdc200a_auto.c:708:12:test_auto_patch_manage	6
+../Core/Src/Devices/test_rdc200a_auto.c:247:5:test_auto_LedCurrentControl	38
+../Core/Src/Devices/test_rdc200a_auto.c:857:5:test_auto_TemperatureSensorCalibration	5
+../Core/Src/Devices/test_rdc200a_auto.c:900:5:test_RDC200A_auto	45

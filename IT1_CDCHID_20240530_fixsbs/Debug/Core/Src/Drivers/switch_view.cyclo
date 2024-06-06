@@ -1,0 +1,8 @@
+../Core/Src/Drivers/switch_view.c:43:6:Get2DVideoModeFlag	1
+../Core/Src/Drivers/switch_view.c:56:6:Set2DVideoModeFlag	1
+../Core/Src/Drivers/switch_view.c:69:6:Get3DVideoModeFlag	1
+../Core/Src/Drivers/switch_view.c:82:6:Set3DVideoModeFlag	1
+../Core/Src/Drivers/switch_view.c:97:9:Get_Mode_from_Video_Buffer	1
+../Core/Src/Drivers/switch_view.c:117:6:Set2DVideoMode	1
+../Core/Src/Drivers/switch_view.c:145:6:Set3DVideoMode	1
+../Core/Src/Drivers/switch_view.c:176:6:switch_2d3d_view	4

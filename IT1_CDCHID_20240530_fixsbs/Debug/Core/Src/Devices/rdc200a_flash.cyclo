@@ -1,0 +1,7 @@
+../Core/Src/Devices/rdc200a_flash.c:378:12:rdc200a_flash_read	7
+../Core/Src/Devices/rdc200a_flash.c:445:12:rdc200a_flash_write	10
+../Core/Src/Devices/rdc200a_flash.c:494:12:rdc200a_erase_chip	7
+../Core/Src/Devices/rdc200a_flash.c:622:12:rdc200a_flash_finish	7
+../Core/Src/Devices/rdc200a_flash.c:463:12:rdc200a_erase_sector	8
+../Core/Src/Devices/rdc200a_flash.c:591:12:rdc200a_flash_prepare	7
+../Core/Src/Devices/rdc200a_flash.c:629:5:RDC200A_ProbeFLASH	1
