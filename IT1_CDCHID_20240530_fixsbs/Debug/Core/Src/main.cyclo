@@ -2,8 +2,8 @@
 ../Core/Src/main.c:183:6:increase_brightness	4
 ../Core/Src/main.c:207:6:process_command	19
 ../Core/Src/main.c:294:6:do_others	10
-../Core/Src/main.c:496:6:HAL_GPIO_EXTI_Callback	8
-../Core/Src/main.c:590:6:delay_us	6
-../Core/Src/main.c:845:6:SystemClock_Config	4
-../Core/Src/main.c:627:5:main	11
-../Core/Src/main.c:1252:6:Error_Handler	1
+../Core/Src/main.c:495:6:HAL_GPIO_EXTI_Callback	8
+../Core/Src/main.c:589:6:delay_us	6
+../Core/Src/main.c:844:6:SystemClock_Config	4
+../Core/Src/main.c:626:5:main	11
+../Core/Src/main.c:1251:6:Error_Handler	1

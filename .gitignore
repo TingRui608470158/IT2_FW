@@ -39,3 +39,5 @@ IT1_CDCHID_20240530_fixsbs/Debug/makefile
 .metadata/.plugins/org.eclipse.ui.workbench/workingsets.xml
 .metadata/version.ini
 IT1_CDCHID_20240530_fixsbs/Debug/makefile
+*.o
+*.su

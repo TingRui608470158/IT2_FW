@@ -1232,8 +1232,8 @@ void AF_Mode()
 	}
 
 	// brightness level
-	if (User_Data[brightness]>5||User_Data[brightness]<0) {
-		User_Data[brightness]=5;
+	if (User_Data[lux_index]>5||User_Data[lux_index]<0) {
+		User_Data[lux_index]=5;
 		use_default=true;
 	}
 	if (use_default)
