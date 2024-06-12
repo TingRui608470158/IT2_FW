@@ -70,8 +70,8 @@ all: main-build
 main-build: IT1_CDCHID_20240530_fixsbs.elf secondary-outputs
 
 # Tool invocations
-IT1_CDCHID_20240530_fixsbs.elf IT1_CDCHID_20240530_fixsbs.map: $(OBJS) $(USER_OBJS) C:\Users\USER\Desktop\Ray\IT2\stm32\project\0605\IT1_CDCHID_20240530_fixsbs\STM32L412CBUX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "IT1_CDCHID_20240530_fixsbs.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\USER\Desktop\Ray\IT2\stm32\project\0605\IT1_CDCHID_20240530_fixsbs\STM32L412CBUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="IT1_CDCHID_20240530_fixsbs.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+IT1_CDCHID_20240530_fixsbs.elf IT1_CDCHID_20240530_fixsbs.map: $(OBJS) $(USER_OBJS) C:\Users\USER\Desktop\Ray\github\IT2_FW\IT1_CDCHID_20240530_fixsbs\STM32L412CBUX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "IT1_CDCHID_20240530_fixsbs.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\USER\Desktop\Ray\github\IT2_FW\IT1_CDCHID_20240530_fixsbs\STM32L412CBUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="IT1_CDCHID_20240530_fixsbs.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

@@ -12,7 +12,7 @@
 extern "C" {
 #endif
 
-bool read_button_states(int8_t *led_brightness_buttons);
+int8_t read_button_states(int8_t lux_level);
 void set_led_brightness(int8_t brightness);
 void control_backlight(uint16_t lux_level);
 int8_t convert_lux_to_brightness(uint16_t lux_level);

@@ -28,24 +28,22 @@ int8_t convert_lux_to_brightness(uint16_t lux_level)
 }
 
 
-bool read_button_states(int8_t *led_brightness_buttons)
+int8_t read_button_states(int8_t lux_index)
 {
 	/* Check the pressed button */
-	bool sts=FALSE;
+//	bool sts=FALSE;
 	//uint8_t UserTxBufferFS[4];// betta added
 	uint8_t tmp[30]={0};
-	uint32_t User_Data[USER_DATA_SIZE];
+//	uint32_t User_Data[USER_DATA_SIZE];
 
 	if(HAL_GPIO_ReadPin(BRIGHTNESS_MINUS_GPIO_Port,BRIGHTNESS_MINUS_Pin)==0) {
 		// Set Mode on button release
 	    //*led_brightness_buttons = convert_lux_to_brightness(lux_level_current);
 
-		*led_brightness_buttons -= led_button_change_size;
-		if(*led_brightness_buttons < 0)
-		{
-			*led_brightness_buttons = 0;
-		}
-	    //	UserTxBufferFS
+		if(lux_index>0)
+			lux_index--;
+
+		//	UserTxBufferFS
 #if 0
 		tmp[0] = 0x22;
 		tmp[1] = 0xdd;
@@ -54,19 +52,13 @@ bool read_button_states(int8_t *led_brightness_buttons)
 	    //sendCdcData((uint8_t*)&UserTxBufferFS[0], 4);
 
 #endif
-	    sts = TRUE;
-	    goto out;
-	}
-
-
-	if(HAL_GPIO_ReadPin(BRIGHTNESS_PLUS_GPIO_Port,BRIGHTNESS_PLUS_Pin)== 0) {
+//	    sts = TRUE;
+//	    goto out;
+	}else if(HAL_GPIO_ReadPin(BRIGHTNESS_PLUS_GPIO_Port,BRIGHTNESS_PLUS_Pin)== 0) {
 		//*led_brightness_buttons = convert_lux_to_brightness(lux_level_current);
 		// Increase Brightness
-		*led_brightness_buttons += led_button_change_size;
-		if(*led_brightness_buttons > 5)
-		{
-			*led_brightness_buttons = 5;
-		}
+		if(lux_index<10)
+			lux_index++;
 	    //	UserTxBufferFS
 #if 0
 		tmp[0] = 0x22;
@@ -75,20 +67,20 @@ bool read_button_states(int8_t *led_brightness_buttons)
 		tmp[3] = 0x02;	// Press on the brightness+ button
 	    //sendCdcData((uint8_t*)&UserTxBufferFS[0], 4);
 #endif
-	    sts = TRUE;
+//	    sts = TRUE;
 	}
 
-out:
-	if (sts) {
-		Flash_Read_Data(FLASH_ADDRESS_FOR_DEVICE_DATA_BYTE, User_Data, USER_DATA_SIZE);
-		User_Data[brightness]= *led_brightness_buttons;
-		Flash_Write_Data(FLASH_ADDRESS_FOR_DEVICE_DATA_BYTE, (uint64_t *)User_Data, USER_DATA_SIZE, FLASH_TYPEPROGRAM_DOUBLEWORD);
-		#if 0
-		sprintf(tmp, "brightness_level=%d\n",User_Data[brightness]);
-		sendCdcData((uint8_t*)tmp, strlen(tmp));
-		#endif
-	}
-	return sts;
+//out:
+//	if (sts) {
+//		Flash_Read_Data(FLASH_ADDRESS_FOR_DEVICE_DATA_BYTE, User_Data, USER_DATA_SIZE);
+//		User_Data[brightness]= *led_brightness_buttons;
+//		Flash_Write_Data(FLASH_ADDRESS_FOR_DEVICE_DATA_BYTE, (uint64_t *)User_Data, USER_DATA_SIZE, FLASH_TYPEPROGRAM_DOUBLEWORD);
+//		#if 0
+//		sprintf(tmp, "brightness_level=%d\n",User_Data[brightness]);
+//		sendCdcData((uint8_t*)tmp, strlen(tmp));
+//		#endif
+//	}
+	return lux_index;
 }
 
 void set_led_brightness(int8_t brightness)
@@ -118,7 +110,7 @@ void set_led_brightness(int8_t brightness)
 		LM3435_Write_Current_LED((uint8_t) brightness);
 		//HAL_Delay(50);
 	}
-	sprintf(tmp, "BRIGHTNESS-LEVEL=%d:5",brightness);
+	sprintf(tmp, "BRIGHTNESS-LEVEL=%d \r\n",brightness);
 	sendCdcData((uint8_t*)tmp, strlen(tmp));
 }
 

@@ -109,7 +109,22 @@ uint16_t als_code = 300;
 // CH: Adapt to low lux level measured
 #if 1 // betta changed
 //uint16_t lux_value[]  = {0, 16, 32, 48, 64, 80, 96, 112, 128, 144, 160, 176, 192, 208, 224, 240};	// lux
-uint16_t lux_value[]  = {0, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120};	// lux
+//uint16_t lux_value[]  = {0, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120};	// lux
+//according to ratio  0	0.028991187	0.133208513	0.325036963	0.6120656	1
+uint16_t lux_value[11][6]  =  {
+		{0, 228, 456, 683, 911, 1139},
+	    {0, 152, 304, 456, 608, 759},
+	    {0, 101, 203, 304, 405, 506},
+	    {0, 68, 135, 203, 270, 338},
+	    {0, 45, 90, 135, 180, 225},
+		{0, 30, 60, 90, 120, 150},
+		{0, 20, 40, 60, 80, 100},
+	    {0, 13, 27, 40, 53, 67},
+	    {0, 9, 18, 27, 36, 44},
+		{0, 6, 12, 18, 24, 30},
+		{0, 4, 8, 12, 16, 20},
+	};	// lux
+int lux_index = 5;
 #else
 uint16_t lux_value[]  = {0, 48, 64, 80, 122, 200, 320, 502, 1004, 2005, 3058, 5005, 8008, 12000, 16000, 20000};	// lux
 #endif
@@ -413,28 +428,45 @@ void do_others(void)
 #endif
 
 #if 1
-				for (i=0;i<sizeof(lux_value);i++)
-					if (lux<lux_value[i]) {
-						lux_level = i-1;
+				for (i=0;i<sizeof(lux_value[lux_index]);i++)
+				{
+					if (lux<lux_value[lux_index][i]) {
+						lux_level = i;
 						break;
 					}
+				}
 				// CH: remove the overshoot when lux level is greater than maximum
-				if (lux_level>15) lux_level = 15;
+				if (lux_level>5) lux_level = 5;
 #else
 				if (lux>9000) lux_level = 9;
 				else lux_level = lux/1000;
 #endif
 				//DPRINTF("\r\nlux = %d, level=%s<%d>%s", lux, COLOR_CYAN, lux_level, COLOR_WHITE);
+#if 1
+				memset(tmp,0,50);
+				sprintf(tmp,"current_brightness =%d\n", current_brightness);
+				sendCdcData((uint8_t*)tmp, strlen(tmp));
+
+				memset(tmp,0,50);
+				sprintf(tmp,"lux_index  =%d\n", lux_index);
+				sendCdcData((uint8_t*)tmp, strlen(tmp));
+#endif
 				if (lux_level_old!=lux_level)
 				{
 					lux_level_old = lux_level;
-#if 1 // betta added
+					current_brightness = lux_level;
+					set_led_brightness(current_brightness);
+#if 0 // betta added
 					control_backlight(lux_level);
 					current_brightness = convert_lux_to_brightness(lux_level);
 #endif
 #if 0 // betta added to debug
+				memset(tmp,0,50);
+				sprintf(tmp,"current_brightness =%d\n", current_brightness);
+				sendCdcData((uint8_t*)tmp, strlen(tmp));
 
-				sprintf(tmp,"current_brightness=%d\n", current_brightness);
+				memset(tmp,0,50);
+				sprintf(tmp,"lux_index  =%d\n", lux_index);
 				sendCdcData((uint8_t*)tmp, strlen(tmp));
 #endif
 
@@ -476,7 +508,8 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 			break;
 		case (BRIGHTNESS_MINUS_Pin|BRIGHTNESS_PLUS_Pin):
 			if (ps_close_state) {
-				button_click_state = read_button_states(&current_brightness);
+				int8_t out_lux_index = read_button_states(lux_index);
+				lux_index = out_lux_index;
 			}
 			HAL_NVIC_ClearPendingIRQ(EXTI15_10_IRQn);
 			break;

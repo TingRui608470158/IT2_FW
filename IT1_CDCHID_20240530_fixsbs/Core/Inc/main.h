@@ -125,7 +125,7 @@ extern void sendCdcData(uint8_t *pbuff, uint32_t length);
 #define TEST_RDC200A_PATTERN	0
 #define TEST_DO_OTHERS			1
 #define TEST_PS					1
-#define TEST_ALS				0
+#define TEST_ALS				1
 #define TEST_IMU				1
 #define TEST_AES				0
 #define TEST_LT7911D			0
