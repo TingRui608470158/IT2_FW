@@ -10,8 +10,8 @@
 #include "string.h"
 #include "i2c.h"
 /* betta added */
-#define DEFALUT_HI_THRESHOLD  740 //763
-#define DEFALUT_LO_THRESHOLD  (DEFALUT_HI_THRESHOLD - 20)
+#define DEFALUT_HI_THRESHOLD  333 //763
+#define DEFALUT_LO_THRESHOLD  320//(DEFALUT_HI_THRESHOLD - 20)
 
 extern USBD_HandleTypeDef hUsbDeviceFS;
 extern double prev_lux;
@@ -1232,8 +1232,12 @@ void AF_Mode()
 	}
 
 	// brightness level
-	if (User_Data[lux_index]>5||User_Data[lux_index]<0) {
-		User_Data[lux_index]=5;
+	if (User_Data[brightness]>5) {
+		User_Data[brightness]=5;
+		use_default=true;
+	}else if(User_Data[brightness]<0)
+	{
+		User_Data[brightness]=0;
 		use_default=true;
 	}
 	if (use_default)

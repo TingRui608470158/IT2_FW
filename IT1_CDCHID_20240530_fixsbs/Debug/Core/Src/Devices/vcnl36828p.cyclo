@@ -55,6 +55,6 @@
 ../Core/Src/Devices/vcnl36828p.c:1113:6:get_ps_int_threshold	1
 ../Core/Src/Devices/vcnl36828p.c:1127:10:read_vcnl36828_ps	1
 ../Core/Src/Devices/vcnl36828p.c:1146:6:AF_Mode	4
-../Core/Src/Devices/vcnl36828p.c:1377:6:initialize_VCNL36828P	1
-../Core/Src/Devices/vcnl36828p.c:1411:6:VCNL36828P_write_word	1
-../Core/Src/Devices/vcnl36828p.c:1424:10:VCNL36828P_read_word	1
+../Core/Src/Devices/vcnl36828p.c:1381:6:initialize_VCNL36828P	1
+../Core/Src/Devices/vcnl36828p.c:1415:6:VCNL36828P_write_word	1
+../Core/Src/Devices/vcnl36828p.c:1428:10:VCNL36828P_read_word	1

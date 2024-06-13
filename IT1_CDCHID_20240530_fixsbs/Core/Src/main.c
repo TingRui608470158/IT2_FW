@@ -44,6 +44,8 @@
 
 //#define PS_INTERRUPT_MODE
 uint8_t tap_num = 0;
+
+uint32_t display_timeout;
 bool display_on = TRUE;
 bool brightness_changed;
 
@@ -55,7 +57,9 @@ bool brightness_changed;
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
 #define FLASH_ADDRESS_FOR_DEVICE_DATA    0x0801FFEA
-
+#define POLL_DURATION 100 // unit: mili seconds
+#define DISPLAY_MINUTES 1 // unit: minutes
+#define DISPLAY_TIMEOUT_COUNT (1000*60*DISPLAY_MINUTES)/POLL_DURATION
 //const uint8_t DEVICE_DATA[8] __attribute__((at(FLASH_ADDRESS_FOR_DEVICE_DATA)));
 uint8_t DEVICE_DATA[16]  __attribute__((section(".app_info"))) =	// 0x0801FFCE
 {
@@ -184,21 +188,21 @@ void increase_brightness(bool plus)
 {
 	uint32_t User_Data[USER_DATA_SIZE];
 	if(!plus) {
-		current_brightness -= 1;
-		if(current_brightness < 0)
+		current_lux_index -= 1;
+		if(current_lux_index < 0)
 		{
-			current_brightness = 0;
+			current_lux_index = 0;
 		}
 	}
 	else {
-		current_brightness += 1;
-		if(current_brightness > 5)
+		current_lux_index += 1;
+		if(current_lux_index > 4)
 		{
-			current_brightness = 5;
+			current_lux_index = 4;
 		}
 	}
 	Flash_Read_Data(FLASH_ADDRESS_FOR_DEVICE_DATA_BYTE, User_Data, USER_DATA_SIZE);
-	User_Data[lux_index]= current_brightness;
+	User_Data[brightness]= current_brightness;
 	Flash_Write_Data(FLASH_ADDRESS_FOR_DEVICE_DATA_BYTE, (uint64_t *)User_Data, USER_DATA_SIZE, FLASH_TYPEPROGRAM_DOUBLEWORD);
 //	set_led_brightness(current_brightness);
 }
@@ -254,7 +258,7 @@ bool process_command() // betta test
 
 			Flash_Read_Data(FLASH_ADDRESS_FOR_DEVICE_DATA_BYTE, User_Data, USER_DATA_SIZE);
 			//Flash_Read_Data(LED_BRIGHTNESS_OFFSET, &User_Data, 1);
-			sprintf(tmp, "(PS_HighThreshold, Brightness)=(%d,%d)\n",User_Data[proximity], User_Data[lux_index]);
+			sprintf(tmp, "(PS_HighThreshold, Brightness)=(%d,%d)\n",User_Data[proximity], User_Data[brightness]);
 			sendCdcData((uint8_t*)tmp, strlen(tmp));
 			HAL_Delay(2000);
 			break;
@@ -339,9 +343,11 @@ void do_others(void)
 			// TODO display off (LM3435 OFF, RDC200A OFF)
 #if TEST_LM3435
 			/* Configure GPIO pin Output Level */
+			/*// betta masked
 			HAL_GPIO_WritePin(LED_D_EN_L_GPIO_Port, LED_D_EN_L_Pin, GPIO_PIN_RESET); // PB0
 			HAL_GPIO_WritePin(LED_D_EN_R_GPIO_Port, LED_D_EN_R_Pin, GPIO_PIN_RESET); // PB1
 			HAL_Delay(5);
+			*/
 #endif /* TEST_LM3435 */
 #if TEST_RDC200A
 			//display_suspend(FALSE);
@@ -353,6 +359,7 @@ void do_others(void)
 			sprintf(tmp,"ps=%d, CLOSE\n", VCNL36828P_GET_PS_DATA());
 			sendCdcData((uint8_t*)tmp, strlen(tmp));
 			ps_close_state = TRUE;
+			display_timeout=DISPLAY_TIMEOUT_COUNT;
 
 #if 0 // betta added
 			memset(tmp,0,30);
@@ -442,7 +449,7 @@ void do_others(void)
 				else current_brightness = lux/1000;
 #endif
 				//DPRINTF("\r\nlux = %d, level=%s<%d>%s", lux, COLOR_CYAN, lux_level, COLOR_WHITE);
-#if 1
+#if 0
 				memset(tmp,0,50);
 				sprintf(tmp,"current_brightness =%d\n", current_brightness);
 				sendCdcData((uint8_t*)tmp, strlen(tmp));
@@ -484,6 +491,8 @@ void do_others(void)
 #endif /* TEST_SOS */
 }
 
+//#define TEST_IMU_XYZ_AXIS
+#define	AWAKE_DISPLAY
 #ifdef TEST_IMU_XYZ_AXIS
 uint8_t axis[3] = {'x', 'y' , 'z'};
 enum{
@@ -538,6 +547,14 @@ energy is concentrated
 			//uint8_t tap_dir = val&1;
 			if (tap_num == 2)
 			{
+
+#ifdef  AWAKE_DISPLAY
+				HAL_GPIO_WritePin(LED_D_EN_L_GPIO_Port, LED_D_EN_L_Pin, GPIO_PIN_SET); // PB0
+				HAL_GPIO_WritePin(LED_D_EN_R_GPIO_Port, LED_D_EN_R_Pin, GPIO_PIN_SET); // PB1
+				display_timeout=DISPLAY_TIMEOUT_COUNT;
+				ps_close_state = TRUE;
+#else //  !AWAKE_DISPLAY
+
 #ifdef TEST_IMU_XYZ_AXIS
 				if (tap_count<300)
 				{
@@ -574,6 +591,7 @@ energy is concentrated
 #endif
 	    			}
 	    		}
+#endif // end of AWAKE_DISPLAY
 			}
 #endif
 		} while(0);
@@ -787,7 +805,7 @@ RETRY_KEY:
 #endif
   /* USER CODE END 2 */
 	Flash_Read_Data(FLASH_ADDRESS_FOR_DEVICE_DATA_BYTE, User_Data, USER_DATA_SIZE);
-	current_brightness = User_Data[lux_index];// It was read for flash.
+	current_brightness = User_Data[brightness];// It was read for flash.
 	set_led_brightness(current_brightness);
 	display_on = TRUE;
 
@@ -799,18 +817,17 @@ RETRY_KEY:
 		// JOSEPH: (40) => ~220 frames/second, (80) => ~306 frames/second (but other sensors will slower)
 #if 1 // betta changed
 		process_command();
-		HAL_Delay(100); //=> ok, 24
+		HAL_Delay(POLL_DURATION); //=> ok, 24
 		//process_sensor();
-		/*
-					val = icm42688_get_tilt_detection_status();
-					if (val>0)
-					{
-						sendCdcData("Tilt", 4);
-						icm42688_enable_tilt_detection2();
-					}
-				*/
 		do_others();
-
+		if (ps_close_state==FALSE)
+				if (0==display_timeout)
+				{
+					HAL_GPIO_WritePin(LED_D_EN_L_GPIO_Port, LED_D_EN_L_Pin, GPIO_PIN_RESET); // PB0
+					HAL_GPIO_WritePin(LED_D_EN_R_GPIO_Port, LED_D_EN_R_Pin, GPIO_PIN_RESET); // PB1
+				}
+				else if (display_timeout>0)
+					display_timeout--;
 #else  // betta changed
 		if (loop_counter<=80) {
 #if TEST_IMU

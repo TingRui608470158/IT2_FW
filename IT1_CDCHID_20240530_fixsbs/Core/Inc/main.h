@@ -207,7 +207,7 @@ extern I2C_HandleTypeDef hi2c1;
 #define USER_DATA_SIZE 2
 enum {
 	proximity,
-	lux_index
+	brightness
 };
 /*
 #define LED_BRIGHTNESS_OFFSET	FLASH_ADDRESS_FOR_DEVICE_DATA_BYTE+8

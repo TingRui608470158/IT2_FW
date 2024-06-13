@@ -1,4 +1,4 @@
-../Core/Src/Drivers/brightness.c:18:8:convert_lux_to_brightness	0	static
-../Core/Src/Drivers/brightness.c:31:8:read_button_states	24	static
-../Core/Src/Drivers/brightness.c:87:6:set_led_brightness	40	static
-../Core/Src/Drivers/brightness.c:118:6:control_backlight	16	static
+../Core/Src/Drivers/brightness.c:17:8:convert_lux_to_brightness	0	static
+../Core/Src/Drivers/brightness.c:30:8:read_button_states	8	static
+../Core/Src/Drivers/brightness.c:74:6:set_led_brightness	56	static
+../Core/Src/Drivers/brightness.c:111:6:control_backlight	16	static
