@@ -18857,8 +18857,8 @@ int8_t read_button_states(int8_t c_lux_index)
  8008896:	4620      	mov	r0, r4
 }
  8008898:	bd10      	pop	{r4, pc}
-		if(c_lux_index<4)
- 800889a:	2c03      	cmp	r4, #3
+		if(c_lux_index<5)
+ 800889a:	2c04      	cmp	r4, #4
  800889c:	dcfb      	bgt.n	8008896 <read_button_states+0x26>
 			c_lux_index++;
  800889e:	3401      	adds	r4, #1

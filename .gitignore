@@ -41,3 +41,10 @@ IT1_CDCHID_20240530_fixsbs/Debug/makefile
 IT1_CDCHID_20240530_fixsbs/Debug/makefile
 *.o
 *.su
+*.o
+IT1_CDCHID_20240530_fixsbs/Debug/IT1_CDCHID_20240530_fixsbs.bin
+IT1_CDCHID_20240530_fixsbs/Debug/Core/Src/Drivers/brightness.o
+IT1_CDCHID_20240530_fixsbs/Debug/IT1_CDCHID_20240530_fixsbs.list
+IT1_CDCHID_20240530_fixsbs/Debug/IT1_CDCHID_20240530_fixsbs.elf
+IT1_CDCHID_20240530_fixsbs/Debug/IT1_CDCHID_20240530_fixsbs.bin
+IT1_CDCHID_20240530_fixsbs/Debug/Core/Src/Drivers/brightness.o
