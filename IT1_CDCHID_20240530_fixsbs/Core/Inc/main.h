@@ -35,6 +35,8 @@ extern "C" {
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
+
 //#include "usbd_cdc.h"
 // JOSEPH: add for VideoOutputEnable and VideoOutputDisable link
 #include "switch_view.h"

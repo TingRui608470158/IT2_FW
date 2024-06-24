@@ -1,4 +1,6 @@
-../Core/Src/Drivers/brightness.c:17:8:convert_lux_to_brightness	3
-../Core/Src/Drivers/brightness.c:30:8:read_button_states	5
-../Core/Src/Drivers/brightness.c:74:6:set_led_brightness	2
-../Core/Src/Drivers/brightness.c:111:6:control_backlight	6
+../Core/Src/Drivers/brightness.c:21:9:inverse_gamma	1
+../Core/Src/Drivers/brightness.c:28:9:positive_gamma	1
+../Core/Src/Drivers/brightness.c:36:8:convert_lux_to_brightness	3
+../Core/Src/Drivers/brightness.c:48:8:read_button_states	5
+../Core/Src/Drivers/brightness.c:93:6:set_led_brightness	2
+../Core/Src/Drivers/brightness.c:130:6:control_backlight	6

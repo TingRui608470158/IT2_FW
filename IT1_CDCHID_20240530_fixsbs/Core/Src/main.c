@@ -112,23 +112,11 @@ uint16_t als_code = 300;
 //uint16_t lux_value[]  = {0, 200, 320, 502, 1004, 2005, 3058, 5005, 8008, 10010, 12000, 16000, 20000};	// lux
 // CH: Adapt to low lux level measured
 #if 1 // betta changed
-//uint16_t lux_value[]  = {0, 16, 32, 48, 64, 80, 96, 112, 128, 144, 160, 176, 192, 208, 224, 240};	// lux
-//uint16_t lux_value[]  = {0, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120};	// lux
-//according to ratio  0	0.028991187	0.133208513	0.325036963	0.6120656	1
-uint16_t lux_value[5][6]  =  {
-    {0, 33, 152, 370, 697, 1139},
-//    {0, 22, 101, 247, 465, 759},
-    {0, 15, 67, 164, 310, 506},
-//    {0, 10, 45, 110, 207, 338},
-    {0, 7, 30, 73, 138, 225},
-//    {0, 4, 20, 49, 92, 150},
-    {0, 3, 13, 33, 61, 100},
-//    {0, 2, 9, 22, 41, 67},
-    {0, 1, 6, 14, 27, 44},
-//    {0, 1, 4, 10, 18, 30},
-//    {0, 1, 3, 7, 12, 20},
-};
-int current_lux_index = 2;
+
+int16_t standard_range = 1200;
+int8_t out_brightness = -1;
+uint16_t lux = 0;
+
 #else
 uint16_t lux_value[]  = {0, 48, 64, 80, 122, 200, 320, 502, 1004, 2005, 3058, 5005, 8008, 12000, 16000, 20000};	// lux
 #endif
@@ -188,23 +176,26 @@ void increase_brightness(bool plus)
 {
 	uint32_t User_Data[USER_DATA_SIZE];
 	if(!plus) {
-		current_lux_index -= 1;
-		if(current_lux_index < 0)
+		current_brightness -= 1;
+		if(current_brightness < 0)
 		{
-			current_lux_index = 0;
+			current_brightness = 0;
 		}
 	}
 	else {
-		current_lux_index += 1;
-		if(current_lux_index > 4)
+		current_brightness += 1;
+		if(current_brightness > 4)
 		{
-			current_lux_index = 4;
+			current_brightness = 4;
 		}
 	}
+	set_led_brightness(current_brightness);
+//	int16_t current_range = current_brightness * 0.2 + 0.1;
+//	standard_range = inverse_gamma(current_range, lux);
+
 	Flash_Read_Data(FLASH_ADDRESS_FOR_DEVICE_DATA_BYTE, User_Data, USER_DATA_SIZE);
 	User_Data[brightness]= current_brightness;
 	Flash_Write_Data(FLASH_ADDRESS_FOR_DEVICE_DATA_BYTE, (uint64_t *)User_Data, USER_DATA_SIZE, FLASH_TYPEPROGRAM_DOUBLEWORD);
-//	set_led_brightness(current_brightness);
 }
 
 
@@ -396,7 +387,6 @@ void do_others(void)
 		if (ps_close_state) {
 #if TEST_LM3435
 			 // masked to read  brightness in ISR
-			//button_click_state = read_button_states(&current_brightness); // Do it at ISR
 #if 1
 			if (button_click_state) { // manual mode
 				set_led_brightness(current_brightness);
@@ -410,10 +400,12 @@ void do_others(void)
 			else if (!manual_control) { // auto mode
 #endif
 #if TEST_ALS
-				uint16_t lux = (uint16_t)read_CM32183E();
+				lux = (uint16_t)read_CM32183E();
+
+
 #if 0 // betta added to debug
 
-				sprintf(tmp,"lux=%d\n", lux);
+				sprintf(tmp,"lux=%d\r\n", lux);
 				sendCdcData((uint8_t*)tmp, strlen(tmp));
 #endif
 #if 0 // betta added
@@ -435,12 +427,51 @@ void do_others(void)
 #endif
 
 #if 1
-				for (i=0;i<sizeof(lux_value[current_lux_index]);i++)
+				if(out_brightness != -1)
 				{
-					if (lux<lux_value[current_lux_index][i]) {
-						current_brightness = i;
+					float current_range = out_brightness * 0.2 + 0.1;
+					standard_range = inverse_gamma(current_range, lux);
+
+#if 1
+					memset(tmp,0,50);
+					sprintf(tmp,"out_brightness =%d\r\n", out_brightness);
+					sendCdcData((uint8_t*)tmp, strlen(tmp));
+					delay_us(100);
+					memset(tmp,0,50);
+					sprintf(tmp,"current_range =%f\r\n", current_range);
+					sendCdcData((uint8_t*)tmp, strlen(tmp));
+					delay_us(100);
+
+					memset(tmp,0,50);
+					sprintf(tmp,"lux = %d \r\n", lux);
+					sendCdcData((uint8_t*)tmp, strlen(tmp));
+					delay_us(100);
+					memset(tmp,0,50);
+					sprintf(tmp,"standard_range = %d \r\n", standard_range);
+					sendCdcData((uint8_t*)tmp, strlen(tmp));
+					delay_us(100);
+#endif
+					out_brightness = -1;
+				}
+
+
+				for (i=1;i<6;i++)
+				{
+					uint8_t current_gamma_out = positive_gamma(i, standard_range);
+
+					if (lux< current_gamma_out) {
+//						memset(tmp,0,50);
+//						sprintf(tmp,"lux_value[%d] = %d\r\n", i, current_gamma_out);
+//						sendCdcData((uint8_t*)tmp, strlen(tmp));
+
+						current_brightness = i-1;
 						break;
 					}
+				}
+
+				if(lux > standard_range)
+				{
+					current_brightness = 5;
 				}
 				// CH: remove the overshoot when lux level is greater than maximum
 //				if (lux_level>5) lux_level = 5;
@@ -449,15 +480,7 @@ void do_others(void)
 				else current_brightness = lux/1000;
 #endif
 				//DPRINTF("\r\nlux = %d, level=%s<%d>%s", lux, COLOR_CYAN, lux_level, COLOR_WHITE);
-#if 0
-				memset(tmp,0,50);
-				sprintf(tmp,"current_brightness =%d\n", current_brightness);
-				sendCdcData((uint8_t*)tmp, strlen(tmp));
 
-				memset(tmp,0,50);
-				sprintf(tmp,"current_lux_index  =%d\n", current_lux_index);
-				sendCdcData((uint8_t*)tmp, strlen(tmp));
-#endif
 				if (brightness_old!=current_brightness)
 				{
 					brightness_old = current_brightness;
@@ -469,10 +492,6 @@ void do_others(void)
 #if 0 // betta added to debug
 				memset(tmp,0,50);
 				sprintf(tmp,"current_brightness =%d\n", current_brightness);
-				sendCdcData((uint8_t*)tmp, strlen(tmp));
-
-				memset(tmp,0,50);
-				sprintf(tmp,"current_lux_index  =%d\n", current_lux_index);
 				sendCdcData((uint8_t*)tmp, strlen(tmp));
 #endif
 
@@ -516,8 +535,8 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 			break;
 		case (BRIGHTNESS_MINUS_Pin|BRIGHTNESS_PLUS_Pin):
 			if (ps_close_state) {
-				int8_t out_lux_index = read_button_states(current_lux_index);
-				current_lux_index = out_lux_index;
+				out_brightness = read_button_states(current_brightness);
+
 			}
 			HAL_NVIC_ClearPendingIRQ(EXTI15_10_IRQn);
 			break;

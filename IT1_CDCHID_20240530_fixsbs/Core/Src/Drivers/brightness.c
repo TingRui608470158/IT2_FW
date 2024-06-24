@@ -13,6 +13,25 @@ uint16_t lux_level_current = 0;
 int8_t led_button_change_size = 1; // Increase/decrease brightness by this amount
 
 bool button_mode = FALSE;
+double lux_gamma =  2.2;
+float gamma_index[] = {0.0, 0.2, 0.4, 0.6, 0.8, 1.0};
+
+
+// 根據原始lux_out值, 找到新的基準值Vin
+int16_t inverse_gamma(float c_range, int16_t lux_out)
+{
+	int16_t Vin = lux_out / pow(c_range, lux_gamma);
+	return Vin;
+}
+
+// 根據比例, 找到Vout
+int16_t positive_gamma(uint8_t index, int16_t Vin)
+{
+	int16_t Vout = Vin * pow(gamma_index[index], lux_gamma);
+	return Vout;
+}
+
+
 
 int8_t convert_lux_to_brightness(uint16_t lux_level)
 {
@@ -26,22 +45,22 @@ int8_t convert_lux_to_brightness(uint16_t lux_level)
 		return (int8_t) lux_level;
 }
 
-
-int8_t read_button_states(int8_t c_lux_index)
+int8_t read_button_states(int8_t c_brightness)
 {
 	/* Check the pressed button */
 //	uint8_t UserTxBufferFS[4];// betta added
 	uint8_t tmp[30]={0};
-
+	float Vin;
+	float current_range;
 
 	if(HAL_GPIO_ReadPin(BRIGHTNESS_MINUS_GPIO_Port,BRIGHTNESS_MINUS_Pin)==0) {
 		// Set Mode on button release
 	    //*led_brightness_buttons = convert_lux_to_brightness(lux_level_current);
+		if(c_brightness>0)
+			c_brightness--;
 
-		if(c_lux_index>0)
-			c_lux_index--;
 
-		//	UserTxBufferFS
+	//	UserTxBufferFS
 #if 0
 		tmp[0] = 0x22;
 		tmp[1] = 0xdd;
@@ -49,15 +68,16 @@ int8_t read_button_states(int8_t c_lux_index)
 		tmp[3] = 0x01;	// Press on the brightness- button
 	    //sendCdcData((uint8_t*)&UserTxBufferFS[0], 4);
 
+
 #endif
 
 //	    goto out;
 	}else if(HAL_GPIO_ReadPin(BRIGHTNESS_PLUS_GPIO_Port,BRIGHTNESS_PLUS_Pin)== 0) {
 		//*led_brightness_buttons = convert_lux_to_brightness(lux_level_current);
 		// Increase Brightness
-		if(c_lux_index<4)
-			c_lux_index++;
-	    //	UserTxBufferFS
+		if(c_brightness<5)
+			c_brightness++;
+//	UserTxBufferFS
 #if 0
 		tmp[0] = 0x22;
 		tmp[1] = 0xdd;
@@ -67,8 +87,7 @@ int8_t read_button_states(int8_t c_lux_index)
 #endif
 
 	}
-
-	return c_lux_index;
+	return c_brightness;
 }
 
 void set_led_brightness(int8_t local_brightness)
@@ -127,3 +146,5 @@ void control_backlight(uint16_t lux_level)
 		led_brightness_current = lux_level_current;
 	}
 }
+
+
